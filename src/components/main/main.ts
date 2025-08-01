@@ -27,7 +27,7 @@ export class MyApp extends LitElement {
     return html`
       <nav>
         <a href="/">Home</a>
-        <a href="/employee/abuzer">About</a>
+        <a href="/employee/new">About</a>
       </nav>
       <main id="router-slot"></main>
     `;

@@ -2,7 +2,8 @@
   "dependencies": {
     "@vaadin/router": "^2.0.0",
     "dayjs": "^1.11.13",
-    "lit": "^3.3.1"
+    "lit": "^3.3.1",
+    "uuid": "^11.1.0"
   },
   "scripts": {
     "dev": "vite",
