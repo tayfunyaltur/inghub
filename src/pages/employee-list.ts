@@ -5,7 +5,9 @@ import { employeeStore } from "../flux/employeeStore";
 import { addEmployee, deleteEmployee } from "../services/employeeService";
 import "../components/employeeCard/employee-card";
 import "../components/warningModal/warning-modal";
+import "../components/customTablle/custom-table";
 import dayjs from "dayjs";
+import { Router } from "@vaadin/router";
 
 @customElement("employee-list")
 export class EmployeeList extends LitElement {
@@ -42,7 +44,9 @@ export class EmployeeList extends LitElement {
   }
 
   private onDeleteEmployee(event: MouseEvent) {
-    this.employeeToDelete = event.detail.toString();
+    const employeeId =
+      (event.target as HTMLButtonElement).dataset.id || event.detail.toString();
+    this.employeeToDelete = employeeId;
   }
 
   private confirmDelete() {
@@ -62,6 +66,7 @@ export class EmployeeList extends LitElement {
 
   render() {
     return html`<button @click="${this.addDemoEmployee}">cacik</button>
+      ${this.employeeToDelete}
       ${this.employeeToDelete &&
       html`<warning-modal
         @close=${this.closeWarningModal}
@@ -69,6 +74,45 @@ export class EmployeeList extends LitElement {
       >
         >TEST</warning-modal
       >`}
+      <custom-table
+        .data="${this.employees}"
+        .columns="${[
+          { label: "First Name", field: "firstName", order: 1 },
+          { label: "Last Name", field: "lastName", order: 2 },
+          { label: "Email", field: "emailAddress", order: 3 },
+          { label: "Phone Number", field: "phoneNumber", order: 4 },
+          {
+            label: "Date of Birth",
+            field: "dateOfBirth",
+            order: 5,
+            render: (value: any) => dayjs(value).format("DD/MM/YYYY"),
+          },
+          {
+            label: "Date of Employment",
+            field: "dateOfEmployment",
+            order: 6,
+            render: (value: any) => dayjs(value).format("DD/MM/YYYY"),
+          },
+          { label: "Department", field: "department", order: 7 },
+          { label: "Position", field: "position", order: 8 },
+          {
+            label: "Actions",
+            field: "actions",
+            order: 9,
+            render: (value: any) => html`
+              <button @click="${function () {
+                Router.go(`/employee/${value.id}`);
+              }}"">
+                Edit
+              </button>
+              <button @click="${(e: MouseEvent) =>
+                this.onDeleteEmployee(e)}" data-id="${value?.id}">
+                Delete
+              </button>
+            `,
+          },
+        ]}"
+      ></custom-table>
       <div class="employee-card-container">
         ${this.employees.map(
           (employee) =>
