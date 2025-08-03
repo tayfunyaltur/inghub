@@ -21,15 +21,28 @@ export class MyApp extends LitElement {
       background: #f0f0f0;
       min-height: 200px;
     }
+    .app-container {
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    .app-container main {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+    }
   `;
 
   render() {
     return html`
-      <nav>
-        <a href="/">Home</a>
-        <a href="/employee/new">About</a>
-      </nav>
-      <main id="router-slot"></main>
+      <div class="app-container">
+        <nav>
+          <a href="/">Home</a>
+          <a href="/employee/new">About</a>
+        </nav>
+        <main id="router-slot"></main>
+      </div>
     `;
   }
 }
