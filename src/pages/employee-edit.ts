@@ -4,6 +4,7 @@ import "../components/employeeForm/employee-form";
 import { addEmployee, editEmployee } from "../services/employeeService";
 import { Employee } from "../types/employee";
 import { employeeStore } from "../flux/employeeStore";
+import { Router } from "@vaadin/router";
 
 @customElement("employee-edit")
 export class HomePage extends LitElement {
@@ -29,9 +30,11 @@ export class HomePage extends LitElement {
     if (this.user === "new") {
       addEmployee(employee);
     } else {
-      employee.id = this.user; // Ensure the ID is set for editing
+      employee.id = this.user;
       editEmployee(employee);
     }
+
+    Router.go("/");
   }
 
   render() {
