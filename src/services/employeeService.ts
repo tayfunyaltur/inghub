@@ -15,3 +15,9 @@ export function deleteEmployee(employeeId: string) {
     payload: { id: employeeId },
   });
 }
+export function editEmployee(employee: Employee) {
+  dispatcher.dispatch({
+    type: "EDIT_EMPLOYEE",
+    payload: employee,
+  });
+}

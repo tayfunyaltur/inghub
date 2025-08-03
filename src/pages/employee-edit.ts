@@ -1,7 +1,7 @@
 import { LitElement, html } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
 import "../components/employeeForm/employee-form";
-import { addEmployee } from "../services/employeeService";
+import { addEmployee, editEmployee } from "../services/employeeService";
 import { Employee } from "../types/employee";
 import { employeeStore } from "../flux/employeeStore";
 
@@ -28,6 +28,9 @@ export class HomePage extends LitElement {
     const employee = event.detail;
     if (this.user === "new") {
       addEmployee(employee);
+    } else {
+      employee.id = this.user; // Ensure the ID is set for editing
+      editEmployee(employee);
     }
   }
 

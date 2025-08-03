@@ -19,6 +19,15 @@ class EmployeeStore {
       case "DELETE_EMPLOYEE":
         this.deleteEmployee(action.payload.id);
         break;
+      case "EDIT_EMPLOYEE":
+        const index = this.state.employees.findIndex(
+          (emp) => emp.id === action.payload.id
+        );
+        if (index !== -1) {
+          this.state.employees[index] = action.payload;
+          this.notify();
+        }
+        break;
     }
   }
 
