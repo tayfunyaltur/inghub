@@ -8,13 +8,22 @@ import "../../router.ts";
 export class MyApp extends LitElement {
   static styles = css`
     nav {
-      background: #333;
-      padding: 1rem;
+      background: #white;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+    }
+    nav span {
+      margin-left: 0.5rem;
     }
     nav a {
       color: white;
       margin-right: 1rem;
       text-decoration: none;
+      color: var(--primary-color);
+    }
+    nav a:first-of-type {
+      margin-left: auto;
     }
     #router-slot {
       padding: 1rem;
@@ -38,8 +47,14 @@ export class MyApp extends LitElement {
     return html`
       <div class="app-container">
         <nav>
-          <a href="/">Home</a>
-          <a href="/employee/new">About</a>
+          <img
+            src="/assets/favicon.png"
+            alt="Logo"
+            style="height: 30px; vertical-align: middle;"
+          />
+          <span>ING</span>
+          <a href="/">Employees</a>
+          <a href="/employee/new">Add New</a>
         </nav>
         <main id="router-slot"></main>
       </div>
