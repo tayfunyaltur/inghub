@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { Employee } from "../../types/employee";
+import dayjs from "dayjs";
 
 @customElement("employee-form")
 export class EmployeeForm extends LitElement {
@@ -51,46 +52,102 @@ export class EmployeeForm extends LitElement {
     return html`<form @submit="${this.handleSubmit}">
       <div>
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" required />
+        <input
+          type="text"
+          id="firstName"
+          value=${this.employee?.firstName || ""}
+          name="firstName"
+          required
+        />
       </div>
       <div>
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" required />
+        <input
+          type="text"
+          id="lastName"
+          value=${this.employee?.lastName || ""}
+          name="lastName"
+          required
+        />
       </div>
       <div>
         <label for="emailAddress">Email Address:</label>
-        <input type="email" id="emailAddress" name="emailAddress" required />
+        <input
+          type="email"
+          id="emailAddress"
+          value=${this.employee?.emailAddress || ""}
+          name="emailAddress"
+          required
+        />
       </div>
       <div>
         <label for="dateOfBirth">Date of Birth:</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth" required />
+        <input
+          type="date"
+          id="dateOfBirth"
+          value=${this.employee?.dateOfBirth
+            ? dayjs(this.employee?.dateOfBirth).format("YYYY-MM-DD")
+            : ""}
+          name="dateOfBirth"
+          required
+        />
       </div>
       <div>
         <label for="dateOfEmployment">Date of Employment:</label>
         <input
           type="date"
           id="dateOfEmployment"
+          value=${this.employee?.dateOfEmployment
+            ? dayjs(this.employee?.dateOfEmployment).format("YYYY-MM-DD")
+            : ""}
           name="dateOfEmployment"
           required
         />
       </div>
       <div>
         <label for="phoneNumber">Phone Number:</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" />
+        <input
+          type="tel"
+          id="phoneNumber"
+          value=${this.employee?.phoneNumber || ""}
+          name="phoneNumber"
+        />
       </div>
       <div>
         <label for="department">Department:</label>
         <select id="department" name="department" required>
-          <option value="Analytics">Analytics</option>
-          <option value="Tech">Tech</option>
+          <option
+            value="Analytics"
+            selected=${this.employee?.department === "Analytics"}
+          >
+            Analytics
+          </option>
+          <option value="Tech" selected=${this.employee?.department === "Tech"}>
+            Tech
+          </option>
         </select>
       </div>
       <div>
         <label for="position">Position:</label>
         <select id="position" name="position" required>
-          <option value="Junior">Junior</option>
-          <option value="Medior">Medior</option>
-          <option value="Senior">Senior</option>
+          <option
+            value="Junior"
+            selected=${this.employee?.position === "Junior"}
+          >
+            Junior
+          </option>
+          <option
+            value="Medior"
+            selected=${this.employee?.position === "Medior"}
+          >
+            Medior
+          </option>
+          <option
+            value="Senior"
+            selected=${this.employee?.position === "Senior"}
+          >
+            Senior
+          </option>
         </select>
       </div>
       <div class="actions">

@@ -8,3 +8,10 @@ export function addEmployee(employee: Employee) {
     payload: { id: uuidv4(), ...employee },
   });
 }
+
+export function deleteEmployee(employeeId: string) {
+  dispatcher.dispatch({
+    type: "DELETE_EMPLOYEE",
+    payload: { id: employeeId },
+  });
+}
