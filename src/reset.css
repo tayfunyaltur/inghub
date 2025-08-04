@@ -1,0 +1,70 @@
+:root {
+  --primary-color: #ff6600;
+  --secondary-color: #8622ff;
+}
+
+/* Box sizing ve margin/padding sıfırlama */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Varsayılan font ve satır yüksekliği */
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Gövde defaultları */
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    sans-serif;
+  font-size: 16px;
+  background-color: #fff;
+  color: #000;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Görsellerin taşmasını engelle */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Form elementleri */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* Link varsayılan stilini sıfırla */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Listelerdeki default noktaları kaldır */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Tablo kenar boşlukları sıfırla */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

@@ -1,0 +1,23 @@
+import { dispatcher } from "../flux/dispatcher";
+import type { Employee } from "../types/employee";
+import { v4 as uuidv4 } from "uuid";
+
+export function addEmployee(employee: Employee) {
+  dispatcher.dispatch({
+    type: "ADD_EMPLOYEE",
+    payload: { id: uuidv4(), ...employee },
+  });
+}
+
+export function deleteEmployee(employeeId: string) {
+  dispatcher.dispatch({
+    type: "DELETE_EMPLOYEE",
+    payload: { id: employeeId },
+  });
+}
+export function editEmployee(employee: Employee) {
+  dispatcher.dispatch({
+    type: "EDIT_EMPLOYEE",
+    payload: employee,
+  });
+}
