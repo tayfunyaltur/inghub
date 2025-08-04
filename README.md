@@ -1,37 +1,39 @@
 # Employee Management App
 
-Bu proje, **LitElement** tabanlı, modern ve yeniden kullanılabilir web bileşenleri ile geliştirilmiş bir **çalışan yönetim uygulamasıdır**.  
-Uygulama, **Flux mimarisi**, **Custom Web Components**, **Pagination**, **Multi View (Table & Card)** ve **Vaadin Router** kullanılarak SPA (Single Page Application) olarak tasarlanmıştır.
+This project is an **employee management application** built with **LitElement** and modern, reusable Web Components.  
+It is designed as a **Single Page Application (SPA)** using **Flux architecture**, **Custom Web Components**, **Pagination**, **Multi View (Table & Card)**, and **Vaadin Router**.
 
 ---
 
-## 🚀 Özellikler
+## 🚀 Features
 
-- ⚡ **LitElement** ile hızlı ve modüler bileşen geliştirme
-- 🗄 **Flux Store** ile global state yönetimi
-- 🔀 **Vaadin Router** ile sayfa yönlendirme
-- 📱 **Responsive Design** (CSS Grid + Flexbox)
-- 📅 **Day.js** ile tarih formatlama
+- ⚡ **LitElement** for fast, modular component development
+- 🗄 **Flux Store** for global state management
+- 🔀 **Vaadin Router** for page navigation
+- 📅 **Day.js** for date formatting
+- ♻ Fully compatible with **Vanilla Web Components**
 
 ---
 
-## 📦 Kurulum
+## 📦 Installation
 
 ```bash
-# Repoyu klonla
+# Clone the repository
 git clone https://github.com/tayfunyaltur/inghub.git
 
-# Proje klasörüne gir
-cd inghub
+# Go to the project folder
+cd employee-management-app
 
-# Bağımlılıkları yükle
+# Install dependencies
 npm install
 
-# Geliştirme modunda çalıştır
+# Run in development mode
 npm run dev
 ```
 
-🛠️ Kullanılan Teknolojiler
+---
+
+## 🛠️ Technologies Used
 
 - LitElement
 - Vaadin Router
