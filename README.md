@@ -5,12 +5,6 @@ Uygulama, **Flux mimarisi**, **Custom Web Components**, **Pagination**, **Multi 
 
 ---
 
-## 🎥 Demo
-
-![Demo](./docs/screenshots/demo.gif)
-
----
-
 ## 🚀 Özellikler
 
 - ⚡ **LitElement** ile hızlı ve modüler bileşen geliştirme
