@@ -60,27 +60,35 @@ export class EmployeeList extends LitElement {
   static styles = css`
     .employee-card-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(375px, 1fr));
       gap: 1rem;
+    }
+
+    .table-action-col {
+      display: flex;
     }
   `;
 
   render() {
     return html`<bread-crumb title="Employee list">
-        <button
+        <custom-button
+          size="small"
+          buttonStyle="outline"
           @click="${() => {
             this.showTable = true;
           }}"
         >
           Show Table
-        </button>
-        <button
+        </custom-button>
+        <custom-button
+          buttonStyle="outline"
+          size="small"
           @click="${() => {
             this.showTable = false;
           }}"
         >
           Show Cards
-        </button>
+        </custom-button>
       </bread-crumb>
       ${this.employeeToDelete &&
       html`<warning-modal
@@ -131,15 +139,16 @@ export class EmployeeList extends LitElement {
                 field: "actions",
                 order: 9,
                 render: (value: any) => html`
-              <button @click="${function () {
-                Router.go(`/employee/${value.id}`);
-              }}"">
-                Edit
-              </button>
-              <button @click="${(e: MouseEvent) =>
-                this.onDeleteEmployee(e)}" data-id="${value?.id}">
-                Delete
-              </button>
+                <custom-button variant="primary" size="small" @click="${function () {
+                  Router.go(`/employee/${value.id}`);
+                }}"">
+                  Edit
+                </custom-button>
+                <custom-button variant="secondary" size="small" buttonStyle="outline" @click="${(
+                  e: MouseEvent
+                ) => this.onDeleteEmployee(e)}" data-id="${value?.id}">
+                  Delete
+                </custom-button>
             `,
               },
             ]}"

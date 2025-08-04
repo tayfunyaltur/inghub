@@ -32,6 +32,7 @@ export class CustomButton extends LitElement {
         --border-color: var(--primary-color);
         --font-size: 1rem;
         --padding-size: 0.5rem 1rem;
+        display: inline-block;
       }
 
       button {
@@ -87,6 +88,7 @@ export class CustomButton extends LitElement {
         this.style.setProperty("--text-color", "var(--secondary-color)");
       } else {
         this.style.setProperty("--border-color", "var(--primary-color)");
+        this.style.setProperty("--text-color", "var(--primary-color)");
       }
     }
   }
