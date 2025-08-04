@@ -2,11 +2,12 @@ import { LitElement, html, css } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import { Employee } from "../types/employee";
 import { employeeStore } from "../flux/employeeStore";
-import { addEmployee, deleteEmployee } from "../services/employeeService";
+import { deleteEmployee } from "../services/employeeService";
 import "../components/employeeCard/employee-card";
 import "../components/warningModal/warning-modal";
-import "../components/customTablle/custom-table";
+import "../components/customTable/custom-table";
 import "../components/breadCrumb/bread-crumb";
+import "../components/pagination/pagination";
 import dayjs from "dayjs";
 import { Router } from "@vaadin/router";
 
@@ -18,20 +19,13 @@ export class EmployeeList extends LitElement {
   declare employeeToDelete?: string;
   @state()
   declare showTable: boolean;
+  @state()
+  declare activePage: number;
 
-  private addDemoEmployee() {
-    const demoEmployee: Employee = {
-      firstName: "Demo",
-      lastName: "Employee",
-      emailAddress: "Demo@employee.com",
-      dateOfBirth: dayjs().format("DD/MM/YYYY").toString(),
-      dateOfEmployment: dayjs().format("DD/MM/YYYY").toString(),
-      phoneNumber: "+905414160662",
-      department: "Tech",
-      position: "Senior",
-    };
-
-    addEmployee(demoEmployee);
+  constructor() {
+    super();
+    this.showTable = true;
+    this.activePage = 0;
   }
 
   connectedCallback() {
@@ -44,6 +38,10 @@ export class EmployeeList extends LitElement {
 
   private closeWarningModal() {
     this.employeeToDelete = undefined;
+  }
+
+  private onPageChange(event: CustomEvent) {
+    this.activePage = event.detail;
   }
 
   private onDeleteEmployee(event: MouseEvent) {
@@ -84,17 +82,31 @@ export class EmployeeList extends LitElement {
           Show Cards
         </button>
       </bread-crumb>
-      ${this.employeeToDelete}
       ${this.employeeToDelete &&
       html`<warning-modal
+        header=${`Are you sure?`}
         @close=${this.closeWarningModal}
         @proceed=${this.confirmDelete}
       >
-        >TEST</warning-modal
+        Selected employee of record
+        ${html`
+          <b>
+            ${this.employees.find((x) => x.id === this.employeeToDelete)
+              ?.firstName}
+            ${this.employees.find((x) => x.id === this.employeeToDelete)
+              ?.lastName}
+          </b>
+        `}
+        will be deleted.</warning-modal
       >`}
       ${this.showTable
         ? html`<custom-table
-            .data="${this.employees}"
+            .data="${this.employees.slice(
+              this.activePage * 10,
+              (this.activePage + 1) * 10 > this.employees.length
+                ? this.employees.length
+                : (this.activePage + 1) * 10
+            )}"
             .columns="${[
               { label: "First Name", field: "firstName", order: 1 },
               { label: "Last Name", field: "lastName", order: 2 },
@@ -133,13 +145,27 @@ export class EmployeeList extends LitElement {
             ]}"
           ></custom-table>`
         : html`<div class="employee-card-container">
-            ${this.employees.map(
-              (employee) =>
-                html`<employee-card
-                  .employee="${employee}"
-                  @delete=${this.onDeleteEmployee}
-                ></employee-card>`
-            )}
-          </div>`} `;
+            ${this.employees
+              .slice(
+                this.activePage * 10,
+                (this.activePage + 1) * 10 > this.employees.length
+                  ? this.employees.length
+                  : (this.activePage + 1) * 10
+              )
+              .map(
+                (employee) =>
+                  html`<employee-card
+                    .employee="${employee}"
+                    @delete=${this.onDeleteEmployee}
+                  ></employee-card>`
+              )}
+          </div>`}
+      <div>
+        <custom-pagination
+          @pageChange=${this.onPageChange}
+          .activePage="${this.activePage}"
+          .pageCount="${Math.ceil(this.employees.length / 10)}"
+        ></custom-pagination>
+      </div> `;
   }
 }

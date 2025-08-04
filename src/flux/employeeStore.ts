@@ -1,9 +1,9 @@
 import { dispatcher, Action } from "./dispatcher";
 import type { Employee } from "../types/employee";
-import { deleteEmployee } from "../services/employeeService";
+import { employees } from "../mock/employee_mock";
 
 class EmployeeStore {
-  private state = { employees: [] as Array<Employee> };
+  private state = { employees: employees as Array<Employee> };
   private listeners: (() => void)[] = [];
 
   constructor() {

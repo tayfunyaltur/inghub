@@ -1,8 +1,12 @@
 import { LitElement, html, css } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
+import "../customButton/custom-button";
 
 @customElement("warning-modal")
 export class WarningModal extends LitElement {
+  @property()
+  declare header: string;
+
   private handleClose() {
     this.dispatchEvent(new CustomEvent("close"));
   }
@@ -32,6 +36,20 @@ export class WarningModal extends LitElement {
       border-radius: 8px;
       min-width: 300px;
     }
+
+    .modal-header {
+      color: var(--primary-color);
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+
+    .actions-row {
+      display: flex;
+      width: 100%;
+      gap: 1rem;
+      justify-content: center;
+      padding-top: 2rem;
+    }
   `;
 
   onBackgroundClick() {
@@ -49,11 +67,16 @@ export class WarningModal extends LitElement {
           class="modal-content-container"
           @click=${this.stopClickPropagation}
         >
-          <div class="modal-header">Header</div>
+          <div class="modal-header">${this.header}</div>
           <div class="modal-content"><slot></slot></div>
           <div class="actions-row">
-            <button @click=${this.handleProceed}>Proceed</button>
-            <button @click=${this.handleClose}>Cancel</button>
+            <custom-button @click=${this.handleProceed}>Proceed</custom-button>
+            <custom-button
+              variant="secondary"
+              buttonStyle="outline"
+              @click=${this.handleClose}
+              >Cancel</custom-button
+            >
           </div>
         </div>
       </div>

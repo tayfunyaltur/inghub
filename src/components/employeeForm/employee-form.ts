@@ -1,7 +1,9 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { Employee } from "../../types/employee";
+import "../customButton/custom-button";
 import dayjs from "dayjs";
+import { Router } from "@vaadin/router";
 
 @customElement("employee-form")
 export class EmployeeForm extends LitElement {
@@ -11,24 +13,42 @@ export class EmployeeForm extends LitElement {
   static styles = css`
     form {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       grid-gap: 1rem;
+      padding: 1rem;
+      overflow: hidden;
     }
 
     form .actions {
       display: flex;
       grid-column: span 3;
       margin-top: 1rem;
+      justify-content: center;
+      gap: 2rem;
     }
 
     form .actions * {
-      width: 100%;
+      width: 400px;
+      max-width: 40%;
     }
 
     form div:not(.actions) {
       display: flex;
       flex-direction: column;
       margin-bottom: 1rem;
+    }
+
+    form input,
+    form select {
+      border: 1px solid lightgray;
+      font-size: 1rem;
+      padding: 0.75rem 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      :host form div:not(.actions) {
+        grid-column: span 3;
+      }
     }
   `;
 
@@ -151,8 +171,18 @@ export class EmployeeForm extends LitElement {
         </select>
       </div>
       <div class="actions">
-        <button type="submit">Submit</button>
-        <a href="/">Cancel</a>
+        <custom-button type="submit" variant="primary" buttonStyle="default"
+          >Submit</custom-button
+        >
+        <custom-button
+          variant="secondary"
+          buttonStyle="outline"
+          @click=${() => {
+            Router.go("/");
+          }}
+        >
+          Cancel
+        </custom-button>
       </div>
     </form>`;
   }

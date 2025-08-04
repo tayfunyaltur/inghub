@@ -27,19 +27,17 @@ export class MyApp extends LitElement {
     }
     #router-slot {
       padding: 1rem;
+      padding-bottom: 4rem;
+      box-sizing: border-box;
       background: #f0f0f0;
-      min-height: 200px;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
     }
     .app-container {
       width: 100%;
       height: 100dvh;
       overflow: hidden;
-    }
-
-    .app-container main {
-      width: 100%;
-      height: 100%;
-      overflow: auto;
     }
   `;
 
